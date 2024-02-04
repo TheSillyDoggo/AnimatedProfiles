@@ -25,9 +25,26 @@ class $modify(ProfilePage) {
 	{
 		ProfilePage::loadPageFromUserInfo(p0);
 
-		as<SimplePlayer*>(as<CCNode*>(this->getChildren()->objectAtIndex(0))->getChildByID("player-menu")->getChildByID("player-robot")->getChildByID("player-robot"))->m_robotSprite->runAnimation("idle01"); // idle 01 and idle 02
+		if (auto l = as<CCNode*>(this->getChildren()->objectAtIndex(0))->getChildByID("player-menu"))
+		{
+			if (auto r = l->getChildByID("player-robot"))
+			{
+				if (r->getChildrenCount() > 0)
+				{
+					if (as<SimplePlayer*>(r->getChildByID("player-robot"))->m_robotSprite)
+						as<SimplePlayer*>(r->getChildByID("player-robot"))->m_robotSprite->runAnimation("idle01"); // idle 01 and idle 02
+				}
+			}
 
-		as<SimplePlayer*>(as<CCNode*>(this->getChildren()->objectAtIndex(0))->getChildByID("player-menu")->getChildByID("player-spider")->getChildByID("player-spider"))->m_spiderSprite->runAnimation("idle01"); // idle 01 and idle 02
+			if (auto s = l->getChildByID("player-spider"))
+			{
+				if (s->getChildrenCount() > 0)
+				{
+					if (as<SimplePlayer*>(s->getChildByID("player-spider"))->m_spiderSprite)
+						as<SimplePlayer*>(s->getChildByID("player-spider"))->m_spiderSprite->runAnimation("idle01"); // idle 01 and idle 02
+				}
+			}
+		}
 	}
 };
 
