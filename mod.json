@@ -9,9 +9,9 @@
 	"name": "Animated Profile Icons",
 	"developer": "TheSillyDoggo",
 	"description": "Animates the spider and robot icons on profiles and comment cells",
-	"tags": {
-		"Cosmetic"
-	},
+	"tags": [
+        "Cosmetic"
+    ],
 	"dependencies": [
         {
             "id": "geode.node-ids",
