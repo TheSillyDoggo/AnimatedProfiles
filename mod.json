@@ -9,6 +9,7 @@
 	"name": "Animated Profile Icons",
 	"developer": "TheSillyDoggo",
 	"description": "Animates the spider and robot icons on profiles and comment cells",
+	"repository": "https://github.com/TheSillyDoggo/AnimatedProfiles",
 	"tags": [
         "Cosmetic"
     ],
