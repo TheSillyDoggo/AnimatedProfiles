@@ -1,4 +1,3 @@
-#include <Geode/Geode.hpp>
 #include <Geode/modify/ProfilePage.hpp>
 #include <Geode/modify/CommentCell.hpp>
 #include <Geode/modify/CCAnimatedSprite.hpp>
@@ -6,76 +5,48 @@
 using namespace geode::prelude;
 
 class $modify(ProfilePage) {
-	bool init(int p0, bool p1)
+	static void onModify(auto & self)
 	{
-		if (!ProfilePage::init(p0, p1))
-			return false;
-
-		if (m_score == nullptr)
-			return true;
-
-		as<SimplePlayer*>(as<CCNode*>(this->getChildren()->objectAtIndex(0))->getChildByID("player-menu")->getChildByID("player-robot")->getChildByID("player-robot"))->m_robotSprite->runAnimation("idle01"); // idle 01 and idle 02
-
-		as<SimplePlayer*>(as<CCNode*>(this->getChildren()->objectAtIndex(0))->getChildByID("player-menu")->getChildByID("player-spider")->getChildByID("player-spider"))->m_spiderSprite->runAnimation("idle01"); // idle 01 and idle 02
-
-		return true;
+		(void) self.setHookPriority("ProfilePage::loadPageFromUserInfo", INT64_MIN + 1);
 	}
-
-	TodoReturn loadPageFromUserInfo(GJUserScore* p0)
-	{
+	void loadPageFromUserInfo(GJUserScore* p0) {
 		ProfilePage::loadPageFromUserInfo(p0);
-
-		if (auto l = as<CCNode*>(this->getChildren()->objectAtIndex(0))->getChildByID("player-menu"))
-		{
-			if (auto r = l->getChildByID("player-robot"))
+		if (!Loader::get()->isModLoaded("rynat.better_unlock_info")) {
+			if (auto l = getChildByIDRecursive("player-menu"))
 			{
-				if (r->getChildrenCount() > 0)
+				if (auto r = l->getChildByID("player-robot"))
 				{
-					if (as<SimplePlayer*>(r->getChildByID("player-robot"))->m_robotSprite)
-						as<SimplePlayer*>(r->getChildByID("player-robot"))->m_robotSprite->runAnimation("idle01"); // idle 01 and idle 02
+					if (auto robot = typeinfo_cast<SimplePlayer*>(r->getChildByID("player-robot"))->m_robotSprite) {
+						robot->runAnimation("idle01");
+					}
 				}
-			}
-
-			if (auto s = l->getChildByID("player-spider"))
-			{
-				if (s->getChildrenCount() > 0)
+				if (auto s = l->getChildByID("player-spider"))
 				{
-					if (as<SimplePlayer*>(s->getChildByID("player-spider"))->m_spiderSprite)
-						as<SimplePlayer*>(s->getChildByID("player-spider"))->m_spiderSprite->runAnimation("idle01"); // idle 01 and idle 02
+					if (auto spider = typeinfo_cast<SimplePlayer*>(s->getChildByID("player-spider"))->m_spiderSprite) {
+						spider->runAnimation("idle01");
+					}
 				}
 			}
 		}
 	}
 };
 
-class $modify (CommentCell)
-{
-	void loadFromComment(GJComment* p0)
+class $modify(CommentCell) {
+	static void onModify(auto & self)
 	{
-		CommentCell::loadFromComment(p0);
-
-		auto l = as<CCLayer*>(this->getChildren()->objectAtIndex(1));
-
-		auto sp = getChildOfType<SimplePlayer>(l, 0);
-
-		if (!sp)
-			return;
-
-		sp->setID("player-icon");
-
-		if (sp->m_robotSprite)
-			sp->m_robotSprite->runAnimation("idle01");
-
-		if (sp->m_spiderSprite)
-			sp->m_spiderSprite->runAnimation("idle01");
+		(void) self.setHookPriority("CommentCell::loadFromComment", INT64_MIN + 1);
 	}
-};
-
-class $modify (CCAnimatedSprite)
-{
-    TodoReturn runAnimation(gd::string p0)
-	{
-		log::info("Playing animation: {}", p0);
-		CCAnimatedSprite::runAnimation(p0);
+	void loadFromComment(GJComment* p0) {
+		CommentCell::loadFromComment(p0);
+		if (auto l = getChildOfType<CCLayer>(this, 1)) {
+			if (auto sp = getChildOfType<SimplePlayer>(l, 0)) {
+				if (sp->m_robotSprite) {
+					sp->m_robotSprite->runAnimation("idle01");
+				}
+				if (sp->m_spiderSprite) {
+					sp->m_spiderSprite->runAnimation("idle01");
+				}
+			}
+		}
 	}
 };
