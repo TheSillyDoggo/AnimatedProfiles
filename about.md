@@ -1,3 +1,5 @@
 # Animated Icons
 
-Animates the icons in profiles and comment cells, yet another shrimple mod
+A simple mod which animated the **Robot** and **Spider** icons in many parts of the game, such as your **profile**, the **shops**, the **icon kit** and **more**.
+
+- Enjoy :3
