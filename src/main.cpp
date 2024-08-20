@@ -24,6 +24,12 @@ class $modify (CCAnimatedSprite)
 
 class $modify (AnimatedProfilePage, ProfilePage)
 {
+	//bui compatibility
+	static void onModify(auto& self)
+    {
+        (void) self.setHookPriority("ProfilePage::loadPageFromUserInfo", -10);
+    }
+	
 	void onAnimate(CCObject* sender)
 	{
 		if (auto robotSpr = getChildOfType<SimplePlayer>(as<CCMenuItemSpriteExtra*>(sender)->getNormalImage(), 0)->m_robotSprite)
