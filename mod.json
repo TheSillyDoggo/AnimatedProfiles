@@ -2,9 +2,11 @@
 	"geode": "3.4.0",
 	"gd": {
 		"win": "2.206",
-		"android": "*"
+		"android": "*",
+		"ios": "2.206",
+		"mac": "2.206"
 	},
-	"version": "v2.0.0",
+	"version": "v2.0.1",
 	"id": "thesillydoggo.animatedprofiles",
 	"name": "Animated Profile Icons",
 	"developer": "TheSillyDoggo",

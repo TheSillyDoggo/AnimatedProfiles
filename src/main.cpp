@@ -46,23 +46,26 @@ class $modify (AnimatedProfilePage, ProfilePage)
 			auto robot = playerMenu->getChildByID("player-robot");
 			auto spider = playerMenu->getChildByID("player-spider");
 
-			robot->removeFromParentAndCleanup(false);
+			if (!Loader::get()->getLoadedMod("rynat.better_unlock_info"))
+			{
+				robot->removeFromParentAndCleanup(false);
 
-			auto robotBtn = CCMenuItemSpriteExtra::create(robot, this, menu_selector(AnimatedProfilePage::onAnimate));
-			robotBtn->setID(robot->getID());
-			m_buttons->addObject(robotBtn);
+				auto robotBtn = CCMenuItemSpriteExtra::create(robot, this, menu_selector(AnimatedProfilePage::onAnimate));
+				robotBtn->setID(robot->getID());
+				m_buttons->addObject(robotBtn);
 
-			playerMenu->insertBefore(robotBtn, spider);
+				playerMenu->insertBefore(robotBtn, spider);
 
-			spider->removeFromParentAndCleanup(false);
+				spider->removeFromParentAndCleanup(false);
 
-			auto spiderBtn = CCMenuItemSpriteExtra::create(spider, this, menu_selector(AnimatedProfilePage::onAnimate));
-			spiderBtn->setID(spider->getID());
-			m_buttons->addObject(spiderBtn);
+				auto spiderBtn = CCMenuItemSpriteExtra::create(spider, this, menu_selector(AnimatedProfilePage::onAnimate));
+				spiderBtn->setID(spider->getID());
+				m_buttons->addObject(spiderBtn);
 
-			playerMenu->insertAfter(spiderBtn, robotBtn);
+				playerMenu->insertAfter(spiderBtn, robotBtn);
 
-			playerMenu->updateLayout();
+				playerMenu->updateLayout();
+			}
 
 			if (auto robotSpr = getChildOfType<SimplePlayer>(robot, 0)->m_robotSprite)
 			{
@@ -168,6 +171,12 @@ class $modify (ShardsPage)
 
 class $modify (AnimatedItemInfoPopup, ItemInfoPopup)
 {
+	//bui compatibility
+	static void onModify(auto& self)
+    {
+        (void) self.setHookPriority("ItemInfoPopup::init", -1010);
+    }
+
 	void onAnimate(CCObject* sender)
 	{
 		if (auto robot = getChildOfType<SimplePlayer>(as<CCMenuItemSpriteExtra*>(sender)->getNormalImage(), 0)->m_robotSprite)
