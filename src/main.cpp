@@ -11,6 +11,12 @@
 
 using namespace geode::prelude;
 
+//im too lazy to replace that shit X) -user95401
+template <class InpT = CCNode*, class T = std::remove_pointer_t<InpT>>
+T* getChildOfType(CCNode* node, int index) {
+	return node->getChildByType<T*>(index);
+}
+
 class $modify (CCAnimatedSprite)
 {
 	virtual void animationFinished(char const* p0)

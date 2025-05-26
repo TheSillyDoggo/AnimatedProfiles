@@ -1,19 +1,17 @@
 {
-	"geode": "3.4.0",
+	"geode": "4.4.0",
 	"gd": {
-		"win": "2.206",
-		"android": "*",
-		"ios": "2.206",
-		"mac": "2.206"
+		"win": "2.2074",
+		"android": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074"
 	},
-	"version": "v2.0.1",
+	"version": "v2.0.2",
 	"id": "thesillydoggo.animatedprofiles",
 	"name": "Animated Profile Icons",
 	"developer": "TheSillyDoggo",
 	"description": "Animates the spider and robot icons on profiles and comment cells",
-	"tags": [
-        "interface"
-    ],
+	"tags": [ "interface" ],
 	"dependencies": [
         {
             "id": "geode.node-ids",
