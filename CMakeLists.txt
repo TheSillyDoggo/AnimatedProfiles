@@ -12,9 +12,9 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 project(AnimatedProfiles VERSION 1.0.0)
 
-# Set up the mod binary
 file(GLOB SOURCES
 	src/*.cpp
+	src/Hooks/*.cpp
 )
 
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
@@ -27,5 +27,4 @@ endif()
 
 add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
 
-# Set up dependencies, resources, link Geode
-setup_geode_mod(${PROJECT_NAME} EXTERNALS geode.node-ids:1.1.4)
+setup_geode_mod(${PROJECT_NAME})
