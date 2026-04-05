@@ -12,6 +12,11 @@ class $modify (AnimatedProfilePage, ProfilePage)
         Utils::animateJump(static_cast<CCMenuItemSprite*>(sender)->getNormalImage()->getChildByType<SimplePlayer>(0));
 	}
 
+    static void onModify(auto& self)
+    {
+        (void)self.setHookPriority("ProfilePage::loadPageFromUserInfo", Priority::First);
+    }
+
 	void loadPageFromUserInfo(GJUserScore* p0)
 	{
 		ProfilePage::loadPageFromUserInfo(p0);
